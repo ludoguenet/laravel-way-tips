@@ -1,0 +1,95 @@
+<script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
+import { BookOpen, CalendarPlus, FolderGit2, LayoutGrid, Flag, ShieldCheck, Users } from '@lucide/vue';
+import AppLogo from '@/components/AppLogo.vue';
+import NavFooter from '@/components/NavFooter.vue';
+import NavMain from '@/components/NavMain.vue';
+import NavUser from '@/components/NavUser.vue';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from '@/components/ui/sidebar';
+import { dashboard } from '@/routes';
+import { index as bookingsIndex } from '@/routes/bookings';
+import { index as golfersIndex } from '@/routes/golfers';
+import { index as proShopIndex, indexLegacy as proShopIndexLegacy } from '@/routes/pro-shop';
+import { index as teeTimesIndex } from '@/routes/tee-times';
+import type { NavItem } from '@/types';
+
+const mainNavItems: NavItem[] = [
+    {
+        title: 'Dashboard',
+        href: dashboard(),
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Book a tee time',
+        href: teeTimesIndex(),
+        icon: CalendarPlus,
+    },
+    {
+        title: 'Bookings',
+        href: bookingsIndex(),
+        icon: Flag,
+    },
+    {
+        title: 'Golfers',
+        href: golfersIndex(),
+        icon: Users,
+    },
+    {
+        title: 'Pro shop (staff only)',
+        href: proShopIndex(),
+        icon: ShieldCheck,
+    },
+    {
+        title: 'Pro shop (the old way)',
+        href: proShopIndexLegacy(),
+        icon: ShieldCheck,
+    },
+];
+
+const footerNavItems: NavItem[] = [
+    {
+        title: 'Repository',
+        href: 'https://github.com/laravel/vue-starter-kit',
+        icon: FolderGit2,
+    },
+    {
+        title: 'Documentation',
+        href: 'https://laravel.com/docs/starter-kits#vue',
+        icon: BookOpen,
+    },
+];
+</script>
+
+<template>
+    <Sidebar collapsible="icon" variant="inset">
+        <SidebarHeader>
+            <SidebarMenu>
+                <SidebarMenuItem>
+                    <SidebarMenuButton size="lg" as-child>
+                        <Link :href="dashboard()">
+                            <AppLogo />
+                        </Link>
+                    </SidebarMenuButton>
+                </SidebarMenuItem>
+            </SidebarMenu>
+        </SidebarHeader>
+
+        <SidebarContent>
+            <NavMain :items="mainNavItems" />
+        </SidebarContent>
+
+        <SidebarFooter>
+            <NavFooter :items="footerNavItems" />
+            <NavUser />
+        </SidebarFooter>
+    </Sidebar>
+    <slot />
+</template>

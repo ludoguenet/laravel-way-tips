@@ -1,0 +1,11 @@
+What was built:
+  - Tip 2 — BookingController@store ($user->bookings()->create()) vs LegacyBookingController@store
+  (Booking::create(['golfer_id'=>...])), reachable from a new "Book a tee time" page.
+  - Tip 3 + 4 — GolferRoleController (attach by model, updateExistingPivot) vs LegacyGolferRoleController, on a new Golfers staff page.
+  - Tip 5 — GolferBookingController (whereBelongsTo) vs LegacyGolferBookingController, linked from each golfer's row.
+  - Tip 6 — BookingOwnershipController (whereKey) vs LegacyBookingOwnershipController, linked from the booking page.
+  - Tip 7 + 9 — BookingCancellationController (is() + touch()) vs LegacyBookingCancellationController, as Cancel buttons on the booking
+  page.
+  - Tip 8 — BookingTransferController (associate()) vs LegacyBookingTransferController, as a golfer-transfer form on the booking page.
+  - Tip 10 — ProShopDashboardController (Gate::allowIf) vs LegacyProShopDashboardController, gated to golfers with the marshal/pro-shop
+  role, in the sidebar.
